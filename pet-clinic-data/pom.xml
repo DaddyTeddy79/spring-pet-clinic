@@ -3,7 +3,7 @@
   	<parent>
     	<groupId>fr.teddy</groupId>
     	<artifactId>spring-pet-clinic</artifactId>
-    	<version>0.0.1</version>
+    	<version>0.0.2-SNAPSHOT</version>
   	</parent>
   	<artifactId>pet-clinic-data</artifactId>
   	<name>Pet Clinic Data Module</name>
