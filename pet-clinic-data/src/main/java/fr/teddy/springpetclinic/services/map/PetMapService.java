@@ -2,9 +2,12 @@ package fr.teddy.springpetclinic.services.map;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import fr.teddy.springpetclinic.model.Pet;
 import fr.teddy.springpetclinic.services.PetService;
 
+@Service
 public class PetMapService extends AbstractMapService<Pet, Long> implements PetService {
 
 	@Override
