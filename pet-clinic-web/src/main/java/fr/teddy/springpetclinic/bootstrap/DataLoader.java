@@ -9,11 +9,13 @@ import fr.teddy.springpetclinic.model.ContactInfo;
 import fr.teddy.springpetclinic.model.Owner;
 import fr.teddy.springpetclinic.model.Pet;
 import fr.teddy.springpetclinic.model.PetType;
+import fr.teddy.springpetclinic.model.Specialty;
 import fr.teddy.springpetclinic.model.Vet;
 import fr.teddy.springpetclinic.services.ContactInfoService;
 import fr.teddy.springpetclinic.services.OwnerService;
 import fr.teddy.springpetclinic.services.PetService;
 import fr.teddy.springpetclinic.services.PetTypeService;
+import fr.teddy.springpetclinic.services.SpecialtyService;
 import fr.teddy.springpetclinic.services.VetService;
 
 @Component
@@ -24,20 +26,27 @@ public class DataLoader implements CommandLineRunner {
 	private final PetService petService;
 	private final PetTypeService petTypeService;
 	private final ContactInfoService contactInfoService;
+	private final SpecialtyService specialtyService;
 
 	public DataLoader(OwnerService ownerService, VetService vetService, PetService petService,
-			PetTypeService petTypeService, ContactInfoService contactInfoService) {
+			PetTypeService petTypeService, ContactInfoService contactInfoService, SpecialtyService specialtyService) {
 		super();
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petService = petService;
 		this.petTypeService = petTypeService;
 		this.contactInfoService = contactInfoService;
+		this.specialtyService = specialtyService;
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 
+		loadData();
+
+	}
+
+	private void loadData() {
 		ContactInfo infoTeddy = new ContactInfo();
 		infoTeddy.setAddress("101 rue du Marais de Lomme");
 		infoTeddy.setZipCode("59160");
@@ -121,10 +130,25 @@ public class DataLoader implements CommandLineRunner {
 
 		System.out.println("Pet loaded...");
 
+		Specialty radiology = new Specialty();
+		radiology.setDescription("Radiology");
+		radiology = specialtyService.save(radiology);
+
+		Specialty surgery = new Specialty();
+		surgery.setDescription("Surgery");
+		surgery = specialtyService.save(surgery);
+
+		Specialty dentistry = new Specialty();
+		dentistry.setDescription("Dentistry");
+		dentistry = specialtyService.save(dentistry);
+
+		System.out.println("Specialties loaded...");
+
 		Vet vet1 = new Vet();
 		vet1.setFirstName("Robert");
 		vet1.setLastName("Bamoul");
 		vet1.setContactInfo(vetInfo);
+		vet1.getSpecialties().add(dentistry);
 
 		vetService.save(vet1);
 
@@ -132,11 +156,11 @@ public class DataLoader implements CommandLineRunner {
 		vet2.setFirstName("Clarisse");
 		vet2.setLastName("Duchamp");
 		vet2.setContactInfo(vetInfo);
+		vet2.getSpecialties().add(surgery);
 
 		vetService.save(vet2);
 
 		System.out.println("Vets loaded...");
-
 	}
 
 }
