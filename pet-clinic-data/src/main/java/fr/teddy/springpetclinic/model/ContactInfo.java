@@ -1,5 +1,8 @@
 package fr.teddy.springpetclinic.model;
 
+import javax.persistence.Entity;
+
+@Entity
 public class ContactInfo extends BaseEntity {
 
 	private String address;
@@ -38,5 +41,4 @@ public class ContactInfo extends BaseEntity {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-
 }

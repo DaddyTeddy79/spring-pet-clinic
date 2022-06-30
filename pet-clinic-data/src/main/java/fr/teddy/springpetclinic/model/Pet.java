@@ -2,9 +2,17 @@ package fr.teddy.springpetclinic.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Pet extends BaseEntity {
 
+	@OneToOne(fetch = FetchType.EAGER)
 	private PetType petType;
+	@ManyToOne
 	private Owner owner;
 	private LocalDate birthDate;
 	private String name;
