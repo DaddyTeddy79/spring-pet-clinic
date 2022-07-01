@@ -1,13 +1,20 @@
 package fr.teddy.springpetclinic.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "contact_info")
 public class ContactInfo extends BaseEntity {
 
+	@Column(name = "address")
 	private String address;
+	@Column(name = "city")
 	private String city;
+	@Column(name = "zip_code")
 	private String zipCode;
+	@Column(name = "telephone")
 	private String telephone;
 
 	public String getAddress() {
