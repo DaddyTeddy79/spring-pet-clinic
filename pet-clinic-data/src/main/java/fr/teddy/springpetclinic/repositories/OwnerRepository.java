@@ -6,4 +6,6 @@ import fr.teddy.springpetclinic.model.Owner;
 
 public interface OwnerRepository extends CrudRepository<Owner, Long> {
 
+	public Owner findByLastName(String lastName);
+
 }
