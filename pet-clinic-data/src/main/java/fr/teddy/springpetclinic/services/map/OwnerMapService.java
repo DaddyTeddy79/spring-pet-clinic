@@ -1,11 +1,13 @@
 package fr.teddy.springpetclinic.services.map;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import fr.teddy.springpetclinic.model.Owner;
 import fr.teddy.springpetclinic.services.OwnerService;
 
 @Service
+@Profile({ "map", "default" })
 public class OwnerMapService extends AbstractMapService<Owner> implements OwnerService {
 
 	@Override

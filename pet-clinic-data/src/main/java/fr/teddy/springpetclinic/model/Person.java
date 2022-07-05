@@ -14,7 +14,7 @@ public class Person extends BaseEntity {
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "info_id")
 	private ContactInfo contactInfo;
 
