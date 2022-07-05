@@ -11,12 +11,14 @@ import fr.teddy.springpetclinic.model.Pet;
 import fr.teddy.springpetclinic.model.PetType;
 import fr.teddy.springpetclinic.model.Specialty;
 import fr.teddy.springpetclinic.model.Vet;
+import fr.teddy.springpetclinic.model.Visit;
 import fr.teddy.springpetclinic.services.ContactInfoService;
 import fr.teddy.springpetclinic.services.OwnerService;
 import fr.teddy.springpetclinic.services.PetService;
 import fr.teddy.springpetclinic.services.PetTypeService;
 import fr.teddy.springpetclinic.services.SpecialtyService;
 import fr.teddy.springpetclinic.services.VetService;
+import fr.teddy.springpetclinic.services.VisitService;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -27,9 +29,11 @@ public class DataLoader implements CommandLineRunner {
 	private final PetTypeService petTypeService;
 	private final ContactInfoService contactInfoService;
 	private final SpecialtyService specialtyService;
+	private final VisitService visitService;
 
 	public DataLoader(OwnerService ownerService, VetService vetService, PetService petService,
-			PetTypeService petTypeService, ContactInfoService contactInfoService, SpecialtyService specialtyService) {
+			PetTypeService petTypeService, ContactInfoService contactInfoService, SpecialtyService specialtyService,
+			VisitService visitService) {
 		super();
 		this.ownerService = ownerService;
 		this.vetService = vetService;
@@ -37,6 +41,7 @@ public class DataLoader implements CommandLineRunner {
 		this.petTypeService = petTypeService;
 		this.contactInfoService = contactInfoService;
 		this.specialtyService = specialtyService;
+		this.visitService = visitService;
 	}
 
 	@Override
@@ -161,6 +166,14 @@ public class DataLoader implements CommandLineRunner {
 		vetService.save(vet2);
 
 		System.out.println("Vets loaded...");
+
+		Visit kikiVisit = new Visit();
+		kikiVisit.setPet(pet1);
+		kikiVisit.setDescription("Everything's fine");
+		kikiVisit.setDate(LocalDate.now());
+		visitService.save(kikiVisit);
+
+		System.out.println("Visits loaded...");
 	}
 
 }
