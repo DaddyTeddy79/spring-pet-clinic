@@ -7,7 +7,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @MappedSuperclass
+@Getter
+@Setter
 public class Person extends BaseEntity {
 
 	@Column(name = "first_name")
@@ -17,28 +22,4 @@ public class Person extends BaseEntity {
 	@OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "info_id")
 	private ContactInfo contactInfo;
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public ContactInfo getContactInfo() {
-		return contactInfo;
-	}
-
-	public void setContactInfo(ContactInfo contactInfo) {
-		this.contactInfo = contactInfo;
-	}
 }
