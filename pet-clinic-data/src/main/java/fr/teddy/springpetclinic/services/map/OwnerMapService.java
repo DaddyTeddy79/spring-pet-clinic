@@ -12,7 +12,18 @@ public class OwnerMapService extends AbstractMapService<Owner> implements OwnerS
 
 	@Override
 	public Owner findByLastName(String lastName) {
-		return null;
+
+		return this.findAll()
+				.stream()
+				.filter(owner -> owner.getLastName().equalsIgnoreCase(lastName))
+				.findFirst()
+				.orElse(null);
+
+		/*
+		 * This is my first version Owner foundOwner = null; for (Owner currentOwner :
+		 * findAll()) { if (currentOwner.getLastName() == lastName) { foundOwner =
+		 * currentOwner; break; } } return foundOwner;
+		 */
 	}
 
 }
