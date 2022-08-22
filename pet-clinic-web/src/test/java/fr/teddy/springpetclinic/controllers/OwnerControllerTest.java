@@ -1,11 +1,12 @@
 package fr.teddy.springpetclinic.controllers;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -76,4 +77,19 @@ class OwnerControllerTest {
 			.andExpect(view().name("not-implemented"));
 	}
 
+	@Test
+	void testShowOwner() throws Exception {
+		// given
+		Owner owner =  new Owner();
+		owner.setId(4L);
+		
+		// when
+		when(ownerService.findById(anyLong())).thenReturn(owner);
+		
+		// then
+		mockMvc.perform(get("/owners/123"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("/owners/ownerDetails"))
+		.andExpect(model().attributeExists("owner"));
+	}
 }
